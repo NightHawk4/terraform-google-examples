@@ -53,6 +53,9 @@ resource "google_compute_instance" "default" {
     email  = "${var.service_account_email == "" ? data.google_compute_default_service_account.default.email : var.service_account_email }"
     scopes = ["${var.service_account_scopes}"]
   }
+  metadata = {
+    block-project-ssh-keys = true
+  }
 }
 
 resource "google_compute_firewall" "ssh" {
